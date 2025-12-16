@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Your Cart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="main.css">
+
+<link rel="stylesheet" href="product.css">
+
+
+</head>
+
+<body>
+
+<header>
+    <div class="nav-container">
+
+        <input type="checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="hamburger">☰</label>
+
+       <nav class="navbar">
+            <ul class="nav-menu">
+                <li><a href="index (1).html">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="#">Men ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Tshirtsmen.html">T-Shirts</a></li>
+                        <li><a href="Trousersmen.html">Trousers</a></li>
+                        <li><a href="Cargosmen.html">Cargos</a></li>
+						<li><a href="jackets.html">Jackets</a></li>
+                    </ul>
+                </li>
+
+                 <li class="dropdown">
+                    <a href="#">Women ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">T-Shirts</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Shoes</a></li>
+						<li><a href="">Jackets</a></li>
+                    </ul>
+                </li>
+
+                 <li class="dropdown">
+                    <a href="#">Kids ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">T-Shirts</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Shoes</a></li>
+						<li><a href="">Jackets</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="location.html">Location</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="setting.html">Setting</a></li>
+            </ul>
+        </nav>
+
+        <input type="text" class="search-box" placeholder="Search..">
+        <a href="cart.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+
+    </div>
+</header>
+
+<h1>Your Cart</h1>
+
+<div class="cart-container">
+    <div id="cart-items"></div>
+    <div class="total-box">Total: £<span id="total-price">0.00</span></div>
+</div>
+
+<script>
+// Load Cart from localStorage
+function loadCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let container = document.getElementById("cart-items");
+    container.innerHTML = "";
+
+    if (cart.length === 0) {
+        container.innerHTML = "<h2>Your cart is empty.</h2>";
+        document.getElementById("total-price").innerText = "0.00";
+        updateCartCount();
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+
+        let cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+
+        cartItem.innerHTML = `
+            <div class="item-info">
+                <strong>${item.name}</strong><br>£${item.price.toFixed(2)}
+            </div>
+
+            <div class="qty-box">
+                <button onclick="changeQty(${index}, -1)">−</button>
+                <div class="qty-number">${item.quantity}</div>
+                <button onclick="changeQty(${index}, 1)">+</button>
+            </div>
+
+            <div class="item-price">£${(item.price * item.quantity).toFixed(2)}</div>
+
+            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        `;
+
+        container.appendChild(cartItem);
+    });
+
+    document.getElementById("total-price").innerText = total.toFixed(2);
+    updateCartCount();
+}
+
+// Change quantity
+function changeQty(index, change) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart[index].quantity += change;
+
+    if (cart[index].quantity < 1) {
+        cart[index].quantity = 1;
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+// Remove item
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+// Update the cart icon count
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let count = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    document.getElementById("cart-count").innerText = count;
+}
+
+window.onload = loadCart;
+</script>
+
+
+</body>
+</html>

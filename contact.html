@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No-JS Navbar</title>
+<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+<header>
+    <div class="nav-container">
+
+        <!-- HAMBURGER CHECKBOX (NO JS) -->
+        <input type="checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="hamburger">☰</label>
+
+        <!-- NAV MENU -->
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li><a href="index (1).html">Home</a></li>
+
+                   <li class="dropdown">
+                    <a href="#">Men ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Tshirtsmen.html">T-Shirts</a></li>
+                       <li><a href="Trousersmen.html">Trousers</a></li>
+                        <li><a href="Cargosmen.html">Cargos</a></li>
+						<li><a href="jackets.html">Jackets</a></li>
+                    </ul>
+                </li>
+                  <li class="dropdown">
+                    <a href="#">Women ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">T-Shirts</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Cargos</a></li>
+						<li><a href="">Jackets</a></li>
+                    </ul>
+                </li>
+
+                 <li class="dropdown">
+                    <a href="#">Kids ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">T-Shirts</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Cargos</a></li>
+						<li><a href="">Jackets</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="location.html">Location</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="setting.html">Setting</a></li>
+            </ul>
+        </nav>
+
+        <input type="text" class="search-box" placeholder="Search..">
+<a href="cart.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+
+    </div>
+</header>
+<h1>hello</h2>
+<script>
+// Add item to cart (with quantity support)
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Check if product already exists
+    let existing = cart.find(item => item.name === name);
+
+    if (existing) {
+        existing.quantity += 1;  // increase quantity
+    } else {
+        cart.push({ name: name, price: price, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    updateCartCount();
+    showToast(name + " added to cart!");
+}
+
+// Update cart icon number
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById("cart-count").innerText = totalItems;
+}
+
+// Toast message
+function showToast(msg) {
+    const toast = document.getElementById("toast");
+    toast.textContent = msg;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+
+window.onload = updateCartCount;
+</script>
+</body>
+
+</html>

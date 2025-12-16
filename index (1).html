@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lil methezh</title>
+<link rel="stylesheet" href="main.css">
+<link rel= "stylesheet" href ="product.css">
+</head>
+
+<body>
+
+<header>
+    <div class="nav-container">
+
+        <!-- HAMBURGER CHECKBOX (NO JS) -->
+        <input type="checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="hamburger">☰</label>
+
+        <!-- NAV MENU -->
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li><a href="index (1).html">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="#">Men ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Tshirtsmen.html">T-Shirts</a></li>
+                        <li><a href="Trousersmen.html">Trousers</a></li>
+                        <li><a href="Cargosmen.html">Cargos</a></li>
+						<li><a href="jackets.html">Jackets</a></li>
+                    </ul>
+                </li>
+
+                 <li class="dropdown">
+                    <a href="#">Women ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Tshirtsmen.html">T-Shirts</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Cargos</a></li>
+						<li><a href="">Jackets</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#">Kids ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">T-Shirts</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Cargos</a></li>
+						<li><a href="">Jackets</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="location.html">Location</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="setting.html">Setting</a></li>
+            </ul>
+			
+			
+			
+        </nav>
+
+        <input type="text" class="search-box" placeholder="Search..">
+		
+		<a href="cart.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+
+
+    </div>
+
+</header>
+ 
+<div class="products-container">
+<div class="large-video">
+<div class="product-box2">
+
+            
+<iframe src="https://www.youtube.com/embed/?v=gbLmku5QACM?autoplay=1&mute=1">  
+  
+		</iframe>	   
+        </div>
+		
+		</div>
+		</div>
+		<video>
+  
+
+
+		
+<script>
+// Load Cart from localStorage
+function loadCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let container = document.getElementById("cart-items");
+    container.innerHTML = "";
+
+    if(cart.length === 0) {
+        container.innerHTML = "<h2>Your cart is empty.</h2>";
+        document.getElementById("total-price").innerText = "0.00";
+        updateCartCount();
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.qty;
+
+        let cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+
+        cartItem.innerHTML = `
+            <div class="item-info">
+                <strong>${item.name}</strong><br>£${item.price.toFixed(2)}
+            </div>
+            <div class="qty-box">
+                <button onclick="changeQty(${index}, -1)">−</button>
+                <div class="qty-number">${item.qty}</div>
+                <button onclick="changeQty(${index}, 1)">+</button>
+            </div>
+            <div class="item-price">£${(item.price * item.qty).toFixed(2)}</div>
+            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        `;
+
+        container.appendChild(cartItem);
+    });
+
+    document.getElementById("total-price").innerText = total.toFixed(2);
+    updateCartCount();
+}
+
+// Change quantity
+function changeQty(index, change) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart[index].qty += change;
+    if(cart[index].qty < 1) cart[index].qty = 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+// Remove item
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+// Update cart icon count
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let count = cart.reduce((sum, item) => sum + item.qty, 0);
+    document.getElementById("cart-count").innerText = count;
+}
+
+window.onload = loadCart;
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,168 @@
+ body {
+    font-family: Arial, sans-serif;
+    background: #FFFBE0;
+    margin: 0;
+    padding: 0;
+	
+ }
+ 
+ /* GENERAL NAV STYLING */
+header {
+    width: 100%;
+    background: #FFFBE0;
+   
+}
+
+.nav-container {
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+	border-style: solid;
+	border-color: #343434;
+	border-radius: 25px;
+	background: #FFF8C1
+	
+}
+
+/* NAV MENU */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+	
+	
+	
+}
+
+.nav-menu > li > a {
+    color: black;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    font-size: 16px;
+	
+}
+
+.cart-btn {
+    margin-left: 15px;
+    padding: 6px 15px;
+    background: white;
+    border: 1px solid #999;
+    border-radius: 4px;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+}
+
+.cart-btn:hover {
+    background: #f1e6a8;
+}
+
+
+/* DROPDOWN */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #FFF8C1;
+    padding: 15px 20px;
+    list-style: none;
+    display: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	border-radius: 15px;
+	
+}
+
+.dropdown-menu li a {
+    padding: 6px 0;
+    display: block;
+    color: black;
+    text-decoration: none;
+    white-space: nowrap;
+	border-radius: 25px;
+	
+	
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* SEARCH BOX */
+.search-box {
+    padding: 6px 12px;
+    font-size: 15px;
+    border-radius: 4px;
+    border: 1px solid #999;
+    width: 200px;
+}
+
+
+
+.hamburger {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    display: none;
+    padding: 10px 15px;
+}
+
+/* Hide checkbox */
+#nav-toggle {
+    display: none;
+}
+
+
+
+@media (max-width: 900px) {
+
+    .hamburger {
+        display: block;
+    }
+
+    /* HIDE MENU BY DEFAULT */
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #FFF8C1;
+        padding: 20px 0;
+    }
+
+    /* SHOW WHEN CHECKBOX IS CHECKED */
+    #nav-toggle:checked ~ nav .nav-menu {
+        display: flex;
+    }
+
+    /* Center items */
+    .nav-menu > li {
+        text-align: center;
+    }
+
+    /* Dropdown inside mobile */
+    .dropdown-menu {
+        position: relative;
+        background: #FFF8C1;
+        box-shadow: none;
+        padding-left: 0;
+        margin-top: 10px;
+    }
+
+    /* Move search bar */
+    .search-box {
+        margin-left: 10px;
+    }
+	
+}
+
